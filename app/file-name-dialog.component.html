@@ -1,0 +1,50 @@
+
+<div>
+    <h4 class="dialog-headline">Configure Device
+        <span>
+       <mat-icon class="pull-right close-icon" (click)="onCloseDialog()">close</mat-icon>
+    </span></h4>
+
+</div>
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-tab-group #matgroup>
+        <mat-tab label="Details">
+            <div class="tab-content">
+                <div class="content-container tab-content-height">
+                    <mat-form-field>
+                        <input matInput formControlName="devicename" placeholder="Enter Device name">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput formControlName="devicedesc" placeholder="Enter Device Description">
+                    </mat-form-field>
+                    <mat-dialog-actions class="pull-right">
+                        <button mat-raised-button color="primary" (click)='matgroup.selectedIndex = 1; $event.preventDefault()'>Next</button>
+                    </mat-dialog-actions>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Location">
+            <div class="tab-content" style="height: 140px">
+
+                <div class="content-container">
+                    <mat-form-field>
+                        <mat-select placeholder="Select the store" formControlName="store">
+                            <mat-option value="option"
+                            *ngFor="let store of this.stores" [value]="store.name">{{store.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <mat-dialog-actions>
+                    <button mat-raised-button color="primary"
+                            type="submit"
+                            (click)="onCloseDialog()"
+                            style="margin-left: 20px;">Save
+                    </button>
+                    <button mat-raised-button color="primary" (click)='matgroup.selectedIndex = 0; $event.preventDefault()'>Back</button>
+                </mat-dialog-actions>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</form>
